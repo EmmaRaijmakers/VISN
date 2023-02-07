@@ -1,6 +1,7 @@
-from skimage import data
 from skimage.viewer import ImageViewer
 from skimage import io
+from skimage.color import rgb2hsv
+from matplotlib import pyplot as plt
  
 img = io.imread("Opdracht_1/flower.jpg")
 # io.imshow(img)
@@ -12,7 +13,6 @@ img = io.imread("Opdracht_1/flower.jpg")
 #greater than the threshold thres
 def keep_red(img, thres):
     for row in img:
-        print("next row")
         for pixel in row:
             if(not(pixel[0] > thres and pixel[0] > pixel[1] and pixel[0] > pixel[2])):
                 grayscale_red = pixel[0] * 0.299
@@ -25,7 +25,24 @@ def keep_red(img, thres):
                 pixel[1] = grayscale_value
                 pixel[2] = grayscale_value
 
+
+#function that creates a histogram of the hue values in the image img
+def img_to_hue_histogram(img):
+    hsv_img = rgb2hsv(img)
+    hue_values = hsv_img[:, :, 0]
+    print(hue_values)
+
+    fig, ax = plt.subplots(figsize =(10, 7))
+    ax.hist(hue_values)
+    plt.show()
+
+#histogram before grayscale
+img_to_hue_histogram(img)
+
+#show grayscale image
 keep_red(img, 75)
-            
 viewer = ImageViewer(img)
 viewer.show()
+
+#histogram after grayscale
+img_to_hue_histogram(img)
