@@ -14,6 +14,8 @@ img = io.imread("Opdracht_1/flower.jpg")
 def keep_red(img, thres_min, thres_max):
     for row in img:
         for pixel in row:
+            #if R-value within threshold and R-value is the highest (pixel is red)
+            #turn all the other pixels to grayscale
             if(not(pixel[0] >= thres_min and pixel[0] <= thres_max and pixel[0] > pixel[1] and pixel[0] > pixel[2])):
                 grayscale_red = pixel[0] * 0.299
                 grayscale_green = pixel[1] * 0.587
@@ -28,10 +30,13 @@ def keep_red(img, thres_min, thres_max):
 
 #function that creates a histogram of the hue values in the image img
 def img_to_hue_histogram(img):
+    #turn rgb image to hsv
     hsv_img = rgb2hsv(img)
-    hue_values = hsv_img[:, :, 0]
-    print(hue_values)
 
+    #get the hue values
+    hue_values = hsv_img[:, :, 0]
+
+    #create histogram of hue values
     fig, ax = plt.subplots(figsize =(10, 7))
     ax.hist(hue_values)
     plt.show()
