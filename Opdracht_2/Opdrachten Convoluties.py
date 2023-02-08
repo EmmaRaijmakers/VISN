@@ -2,6 +2,7 @@ from skimage import data, filters
 from skimage.viewer import ImageViewer
 import scipy
 from scipy import ndimage
+from skimage import feature
 
 image = data.camera()
 viewer = ImageViewer(image)
@@ -50,3 +51,8 @@ viewer = ImageViewer(sobel_filter)
 viewer.show()
 
 #Opdracht 3
+
+#Canny Edge Detection
+canny_filter = feature.canny(image, sigma=2.1)
+viewer = ImageViewer(canny_filter)
+viewer.show()
