@@ -9,12 +9,12 @@ print(len(digits.data))
 print(digits.target)
 print(len(digits.target))
 
-# random.shuffle(digits.data)
+#randomize data and target in the same way, to still ensure the match on the indexes
 ran_data, ran_target = shuffle(digits.data, digits.target, random_state=0)
 
 clf = svm.SVC(gamma=0.001, C=100)
 # X,y = digits.data[:-10], digits.target[:-10]
-X,y = ran_data[:-10], ran_target[:-10]
+X,y = ran_data[:-(len(ran_data)//3)], ran_target[:-(len(ran_target)//3)]
 # X,y = digits.data[:-len(digits.data//3)], digits.target[:-len(digits.target//3)]
 clf.fit(X,y)
 
