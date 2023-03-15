@@ -11,6 +11,8 @@ import matplotlib.pyplot as plt
 import os
 import cv2
 
+import random
+
 #TODO write read me and give credit in read me to \/
 
 #Dataset used for this project from: https://www.kaggle.com/datasets/grassknoted/asl-alphabet?resource=download
@@ -68,3 +70,5 @@ for letter in letters:
 
 
 print(len(training_data))
+
+random.shuffle(training_data)
