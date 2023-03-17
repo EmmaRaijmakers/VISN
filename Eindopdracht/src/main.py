@@ -13,6 +13,10 @@ import cv2
 
 import random
 
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
+from keras.utils import to_categorical
+
 #TODO write read me and give credit in read me to \/
 
 #Dataset used for this project from: https://www.kaggle.com/datasets/grassknoted/asl-alphabet?resource=download
@@ -109,3 +113,16 @@ test_images = (test_images / 255) - 0.5
 
 print(train_images[0])
 print(test_images[0])
+
+num_epochs = 10 #TODO change this var
+
+model = Sequential([
+    #TODO add layers
+])
+
+model.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+model.fit(train_images, to_categorical(train_labels), epochs=num_epochs, validation_data=(test_images, to_categorical(test_labels)))
+
+test_loss, test_acc = model.evaluate(test_images,  to_categorical(test_labels), verbose=2)
+print(test_acc)
