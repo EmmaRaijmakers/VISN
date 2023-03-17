@@ -72,3 +72,15 @@ for letter in letters:
 print(len(training_data))
 
 random.shuffle(training_data)
+print(training_data[0][1])
+
+train_images = []
+train_labels = []
+
+#separate featuers and labels 
+for features, label in training_data:
+    train_images.append(features)
+    train_labels.append(label)
+
+#change train_images to np and reshape into single array
+train_images = np.array(train_images).reshape(-1, image_size, image_size, 1)
