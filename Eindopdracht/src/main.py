@@ -103,5 +103,9 @@ print(test_labels[0])
 train_images = np.array(train_images).reshape(-1, image_size, image_size, 1)
 test_images = np.array(test_images).reshape(-1, image_size, image_size, 1)
 
+#normalize the images
+train_images = (train_images / 255) - 0.5
+test_images = (test_images / 255) - 0.5
+
 print(train_images[0])
 print(test_images[0])
