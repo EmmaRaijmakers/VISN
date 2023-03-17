@@ -71,16 +71,37 @@ for letter in letters:
 
 print(len(training_data))
 
+#randomize the images
 random.shuffle(training_data)
 print(training_data[0][1])
 
 train_images = []
 train_labels = []
 
-#separate featuers and labels 
-for features, label in training_data:
-    train_images.append(features)
-    train_labels.append(label)
+test_data_size = 10000
 
-#change train_images to np and reshape into single array
+test_images = []
+test_labels = []
+
+#separate images and labels into the testing dataset
+#(the first 10.000) and the training dataset (the rest)
+for i in range(len(training_data)):
+    if i < test_data_size:
+        test_images.append(training_data[i][0])
+        test_labels.append(training_data[i][1])
+    else:
+        train_images.append(training_data[i][0])
+        train_labels.append(training_data[i][1])
+
+print(train_images[0])
+print(train_labels[0])
+
+print(test_images[0])
+print(test_labels[0])
+
+#reshape train and test images
 train_images = np.array(train_images).reshape(-1, image_size, image_size, 1)
+test_images = np.array(test_images).reshape(-1, image_size, image_size, 1)
+
+print(train_images[0])
+print(test_images[0])
