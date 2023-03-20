@@ -49,7 +49,6 @@ letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
 
 #tutorial: https://www.youtube.com/watch?v=j-3vuBynnOE
 
-#TODO split training set in training and test dataset
 training_data = []
 
 for letter in letters:
@@ -89,6 +88,8 @@ test_labels = []
 
 #separate images and labels into the testing dataset
 #(the first 10.000) and the training dataset (the rest)
+
+#TODO can this be done easier? split?
 for i in range(len(training_data)):
     if i < test_data_size:
         test_images.append(training_data[i][0])
