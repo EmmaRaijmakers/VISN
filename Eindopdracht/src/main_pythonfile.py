@@ -71,12 +71,8 @@ for letter in letters:
         #add new image to the training set
         training_data.append([compressed_image_array, letter_num])
 
-
-print(len(training_data))
-
 #randomize the images
 random.shuffle(training_data)
-print(training_data[0][1])
 
 train_images = []
 train_labels = []
@@ -98,12 +94,6 @@ for i in range(len(training_data)):
         train_images.append(training_data[i][0])
         train_labels.append(training_data[i][1])
 
-print(train_images[0])
-print(train_labels[0])
-
-print(test_images[0])
-print(test_labels[0])
-
 #reshape train and test images
 train_images = np.array(train_images).reshape(-1, image_size, image_size, 1)
 test_images = np.array(test_images).reshape(-1, image_size, image_size, 1)
@@ -111,9 +101,6 @@ test_images = np.array(test_images).reshape(-1, image_size, image_size, 1)
 #normalize the images
 train_images = (train_images / 255) - 0.5
 test_images = (test_images / 255) - 0.5
-
-print(train_images[0])
-print(test_images[0])
 
 num_epochs = 10 #TODO change this var
 
