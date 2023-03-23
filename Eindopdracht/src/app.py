@@ -1,7 +1,7 @@
-from cv2 import *
+import cv2 as cv
 
 webcam_port = 0
-webcam = VideoCapture(webcam_port)
+webcam = cv.VideoCapture(webcam_port)
   
 #reading the input using the webcam
 result, image = webcam.read()
@@ -9,11 +9,11 @@ result, image = webcam.read()
 #if image is captured  
 if result: 
     #show the capture
-    imshow(image)
+    cv.imshow("ASL-detection", image)
   
     #destroy window after keyboard interrupt
-    waitKey(0)
-    destroyWindow("GeeksForGeeks")
+    cv.waitKey(0)
+    cv.destroyWindow("ASL-detection")
   
 #if capture went wrong
 else:
