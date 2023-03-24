@@ -21,7 +21,7 @@ from keras.utils import to_categorical
 
 #Dataset used for this project from: https://www.kaggle.com/datasets/grassknoted/asl-alphabet?resource=download
 
-image = imread("C:/Users/emmar/Documents/GitHub/VISN/Opdracht_1/flower.jpg")
+image = imread("Opdracht_1/flower.jpg")
 
 #grayscale
 image_gray = rgb2gray(image)
@@ -130,3 +130,5 @@ model.fit(train_images, to_categorical(train_labels), epochs=num_epochs, validat
 
 test_loss, test_acc = model.evaluate(test_images,  to_categorical(test_labels), verbose=2)
 print(test_acc)
+
+print(model.predict("Eindopdracht/dataset/asl_alphabet/asl_alphabet/A_test.jpg"))
