@@ -14,20 +14,20 @@ import cv2
 import random
 
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
+from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten, Activation
 from keras.utils import to_categorical
 
 #TODO write read me and give credit in read me to \/
 
 #Dataset used for this project from: https://www.kaggle.com/datasets/grassknoted/asl-alphabet?resource=download
 
-image = imread("Opdracht_1/flower.jpg")
+image = imread("C:/Users/emmar/Documents/GitHub/VISN/Opdracht_1/flower.jpg")
 
 #grayscale
 image_gray = rgb2gray(image)
 
 #edge detection
-canny_filter = feature.canny(image_gray, sigma=2.1) #TODO change sigma
+canny_filter = feature.canny(image_gray, sigma=2) #TODO change sigma
 
 #gaussian filter                    #for rgb image
 gaussian_filter = gaussian(image, multichannel=True, sigma=2) #TODO change sigma
@@ -68,6 +68,12 @@ for letter in letters:
         image_size = 50 #TODO this bigger/smaller?
         compressed_image_array = cv2.resize(image_array, (image_size, image_size))
 
+        #add canny filter
+        # canny_filter_image = feature.canny(compressed_image_array, sigma=3)
+
+        #add gaussian filter
+        # gaussian_filter_image = gaussian(compressed_image_array, sigma=2) #TODO change sigma
+
         #add new image to the training set
         training_data.append([compressed_image_array, letter_num])
 
@@ -102,11 +108,22 @@ test_images = np.array(test_images).reshape(-1, image_size, image_size, 1)
 train_images = (train_images / 255) - 0.5
 test_images = (test_images / 255) - 0.5
 
-num_epochs = 10 #TODO change this var
+#normalize the images canny
+# train_images = train_images - 0.5
+# test_images = test_images - 0.5
+
+num_filters = 10
+filter_size = 3
+pool_size = 2
+num_epochs = 50 #TODO change these vars
 
 model = Sequential([
-    #TODO add layers
+    Conv2D(num_filters, filter_size, input_shape=train_images[0].shape),
+    MaxPooling2D(pool_size=pool_size),
+    Flatten(),
+    Dense(29, activation="sigmoid", name="dense")
 ])
+
 
 model.compile('adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
