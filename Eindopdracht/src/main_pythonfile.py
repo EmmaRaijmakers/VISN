@@ -27,10 +27,10 @@ image = imread("C:/Users/emmar/Documents/GitHub/VISN/Opdracht_1/flower.jpg")
 image_gray = rgb2gray(image)
 
 #edge detection
-canny_filter = feature.canny(image_gray, sigma=2) #TODO change sigma
+canny_filter = feature.canny(image_gray, sigma=2) 
 
 #gaussian filter                    #for rgb image
-gaussian_filter = gaussian(image, multichannel=True, sigma=2) #TODO change sigma
+gaussian_filter = gaussian(image, multichannel=True, sigma=2) 
 
 # viewer = ImageViewer(image)
 # viewer.show()
@@ -61,18 +61,17 @@ for letter in letters:
     
     for image in os.listdir(path):
         #get one image
-        image_array = cv2.imread(os.path.join(path, image), cv2.IMREAD_GRAYSCALE) #TODO gray scale can be added here, do it??
+        image_array = cv2.imread(os.path.join(path, image), cv2.IMREAD_GRAYSCALE)
 
         #compress the image to a smaller resolution
-        #TODO is this needed?? > makes faster
-        image_size = 50 #TODO this bigger/smaller?
+        image_size = 50
         compressed_image_array = cv2.resize(image_array, (image_size, image_size))
 
         #add canny filter
         # canny_filter_image = feature.canny(compressed_image_array, sigma=3)
 
         #add gaussian filter
-        # gaussian_filter_image = gaussian(compressed_image_array, sigma=2) #TODO change sigma
+        # gaussian_filter_image = gaussian(compressed_image_array, sigma=2)
 
         #add new image to the training set
         training_data.append([compressed_image_array, letter_num])
@@ -115,7 +114,7 @@ test_images = (test_images / 255) - 0.5
 num_filters = 10
 filter_size = 3
 pool_size = 2
-num_epochs = 50 #TODO change these vars
+num_epochs = 50
 
 model = Sequential([
     Conv2D(num_filters, filter_size, input_shape=train_images[0].shape),
