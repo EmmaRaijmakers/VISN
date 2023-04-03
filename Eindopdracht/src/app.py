@@ -1,4 +1,4 @@
-import cv2 as cv
+import cv2
 from keras.models import load_model
 
 #load model made in main file
@@ -8,7 +8,7 @@ from keras.models import load_model
 model = load_model("C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/src/ASL_model.keras")
 
 webcam_port = 0
-webcam = cv.VideoCapture(webcam_port)
+webcam = cv2.VideoCapture(webcam_port)
   
 #reading the input using the webcam
 result, image = webcam.read()
@@ -16,11 +16,13 @@ result, image = webcam.read()
 #if image is captured  
 if result: 
     #show the capture
-    cv.imshow("ASL-detection", image)
+    cv2.imshow("ASL-detection", image)
   
     #destroy window after keyboard interrupt
-    cv.waitKey(0)
-    cv.destroyWindow("ASL-detection")
+    cv2.waitKey(0)
+    cv2.destroyWindow("ASL-detection")
+
+
   
 #if capture went wrong
 else:
