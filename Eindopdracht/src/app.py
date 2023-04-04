@@ -56,15 +56,15 @@ else:
         #open the test image version of the letter
         path_captured = "C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/dataset/asl_alphabet_test/als_alphabet_test_captures/"+letters[i]+"_test.jpg"
         path = "C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/dataset/asl_alphabet_test/asl_alphabet_test/"+letters[i]+"_test.jpg"
-        image_to_predict = cv2.imread(path_captured, cv2.IMREAD_GRAYSCALE)
+        image = cv2.imread(path_captured, cv2.IMREAD_GRAYSCALE)
 
         #preprocess the image the same as images used for training
-        compressed_image_to_predict = cv2.resize(image_to_predict, (image_size, image_size))
-        reshaped_image_to_predict = compressed_image_to_predict.reshape(-1, image_size, image_size, 1)
-        normalized_image_to_predict = (reshaped_image_to_predict / 255) - 0.5
+        compressed_image = cv2.resize(image, (image_size, image_size))
+        reshaped_image = compressed_image.reshape(-1, image_size, image_size, 1)
+        normalized_image = (reshaped_image / 255) - 0.5
 
         #predict the letter
-        prediction = model.predict(normalized_image_to_predict)
+        prediction = model.predict(normalized_image)
 
         #print the actual letter instead of percentages
         predicted_letter = list(prediction[0]).index(max(prediction[0]))
