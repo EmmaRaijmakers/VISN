@@ -11,9 +11,14 @@ model = load_model("C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/src/ASL_mo
 
 letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'del', 'nothing', 'space']
 
-image_size = 50
-
 live_capture_mode = False
+
+#function to preprocess the image the same as the training data
+def preprocess_image(image, image_size = 50):
+    compressed_image = cv2.resize(image, (image_size, image_size))
+    reshaped_image = compressed_image.reshape(-1, image_size, image_size, 1)
+    normalized_image = (reshaped_image / 255) - 0.5
+    return normalized_image
 
 if live_capture_mode:
     webcam_port = 0
@@ -32,13 +37,10 @@ if live_capture_mode:
         cv2.destroyWindow("ASL-detection")
 
         #preprocess the image the same as the images used for training
-        gray_image = color.rgb2gray(image)
-        compressed_image = cv2.resize(gray_image, (image_size, image_size))
-        reshaped_image = compressed_image.reshape(-1, image_size, image_size, 1)
-        normalized_image = (reshaped_image / 255) - 0.5
+        preprocessed_image = preprocess_image(image)
 
         #predict the letter
-        prediction = model.predict(normalized_image)
+        prediction = model.predict(preprocessed_image)
 
         #print the actual letter instead of percentages
         predicted_letter = list(prediction[0]).index(max(prediction[0]))
@@ -58,13 +60,11 @@ else:
         path = "C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/dataset/asl_alphabet_test/asl_alphabet_test/"+letters[i]+"_test.jpg"
         image = cv2.imread(path_captured, cv2.IMREAD_GRAYSCALE)
 
-        #preprocess the image the same as images used for training
-        compressed_image = cv2.resize(image, (image_size, image_size))
-        reshaped_image = compressed_image.reshape(-1, image_size, image_size, 1)
-        normalized_image = (reshaped_image / 255) - 0.5
+        #preprocess the image the same as the images used for training
+        preprocessed_image = preprocess_image(image)
 
         #predict the letter
-        prediction = model.predict(normalized_image)
+        prediction = model.predict(preprocessed_image)
 
         #print the actual letter instead of percentages
         predicted_letter = list(prediction[0]).index(max(prediction[0]))
