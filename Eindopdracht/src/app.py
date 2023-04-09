@@ -3,9 +3,6 @@ from keras.models import load_model
 from skimage import color
 import matplotlib.pyplot as plt
 
-#load model made in main file
-#to not have to train the model everytime the application is run
-
 #TODO change to relative paths (why not working?)
 model = load_model("C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/src/ASL_model.keras")
 
