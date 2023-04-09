@@ -55,6 +55,11 @@ else:
         #open the test image version of the letter
         path_captured = "C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/dataset/asl_alphabet_test/als_alphabet_test_captures/"+letters[i]+"_test.jpg"
         path = "C:/Users/emmar/Documents/GitHub/VISN/Eindopdracht/dataset/asl_alphabet_test/asl_alphabet_test/"+letters[i]+"_test.jpg"
+        
+        #to predict the test dataset
+        # image = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
+        
+        #to predict the captures test dataset
         image = cv2.imread(path_captured, cv2.IMREAD_GRAYSCALE)
 
         #preprocess the image the same as the images used for training
